@@ -4,8 +4,25 @@
 #include "pch.h"
 #include <iostream>
 
+using namespace std;
+
+void draw()
+{
+
+}
+
+void update()
+{
+	draw();
+}
+
+
+
 int main()
 {
+	int tictactoe[3][3];
+
+
 
 }
 
