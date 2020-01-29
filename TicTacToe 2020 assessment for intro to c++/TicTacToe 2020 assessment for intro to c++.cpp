@@ -156,16 +156,19 @@ bool checkifyouwon()
 	return false;
 }
 
-void getcommand() //used to place an X or an O where the player specified
+void playerinput() //used to place an X or an O where the player specified
 {
+
 	validinput = false;
 		cout << "it is currently player" << playernumber << "'s turn now" << endl;
 		cout << "please enter a number on the numpad and press enter" << " ";
+		cin.clear();
+		cin.ignore(cin.rdbuf()->in_avail());
 		cin >> input;
 		if (cin.fail())
 		{
 			cin.clear();
-			cin.ignore();
+			cin.ignore(cin.rdbuf()->in_avail());
 			return;
 		}
 
@@ -297,7 +300,7 @@ void update()
 		XorO = 'X';
 	}
 
-	getcommand();
+	playerinput();
 
 
 }
