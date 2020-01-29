@@ -5,20 +5,25 @@
 #include <iostream>
 
 using namespace std;
-char tictactoe[3][3];
-bool gameover = false;
-int playernumber = 2;
-int input = 0;
-char XorO = 'O';
-bool gamestarted = false;
+char board[3][3]; // the 2D array that stores the board
+bool gameover = false; //keeps the game going untill it is finished
+int playernumber = 2; // this allows the game to display the current player
+char XorO = 'O'; //switches between X or O used to tell the game what to place in the 2d array
+int input = 0; // stores the input of the player
+bool validinput = true; //used if we need to make sure the player input a valid input
 
-void start()
+void start() 
 {
+	cout << "welcome to tic-tactoe" << endl;
+	cout << "controls for this game use the numpad make sure you have num lock enabled" << endl;
+	system("pause");
+
+
 	for (int x = 0; x < 3; x++)
 	{
 		for (int y = 0; y < 3; y++)
 		{
-			tictactoe[x][y] = ' ';
+			board[x][y] = ' ';
 		}
 	}
 }
@@ -27,34 +32,38 @@ void tiegame()
 {
 	
 		cout << "nobody won the game" << endl;
-		cin;
-		//gameover = true;
+		system("pause");
+		gameover = true;
 }
 
 void youwon()
 {
 	cout << "player " << playernumber << " won the game" << endl;
-	cin;
+	system("pause");
 	gameover = true;
 
 }
 
 bool checkiftiegame()
 {
-
+	if (board[0][0] != ' ' && board[0][1] != ' ' && board[0][2] != ' ' && 
+		board[1][0] != ' ' && board[1][1] != ' ' && board[1][2] != ' ' && 
+		board[2][0] != ' ' && board[2][1] != ' ' && board[2][2] != ' ')
+	{
+		return true;
+	}
 	return false;
 }
 
 
 bool checkifyouwon()
 {
-	
+	// a weird way to check if you won that somehow works
 
 
-	// to check left to right
 	for (int y = 0; y < 3 ;y++)
 	{
-		if (tictactoe[0][y] == XorO)
+		if (board[0][y] == XorO)
 		{
 			if (y == 2)
 			{
@@ -67,7 +76,7 @@ bool checkifyouwon()
 	}
 	for (int y = 0; y < 3;y++)
 	{
-		if (tictactoe[1][y] == XorO)
+		if (board[1][y] == XorO)
 		{
 			if (y == 2)
 			{
@@ -80,7 +89,7 @@ bool checkifyouwon()
 	}
 	for (int y = 0; y < 3;y++)
 	{
-		if (tictactoe[2][y] == XorO)
+		if (board[2][y] == XorO)
 		{
 			if (y == 2)
 			{
@@ -91,10 +100,9 @@ bool checkifyouwon()
 			break;
 		}
 	}
-	//to check from top to bottom
 	for (int x = 0; x < 3;x++)
 	{
-		if (tictactoe[x][0] == XorO)
+		if (board[x][0] == XorO)
 		{
 			if (x == 2)
 			{
@@ -107,7 +115,7 @@ bool checkifyouwon()
 	}
 	for (int x = 0; x < 3;x++)
 	{
-		if (tictactoe[x][1] == XorO)
+		if (board[x][1] == XorO)
 		{
 			if (x == 2)
 			{
@@ -120,7 +128,7 @@ bool checkifyouwon()
 	}
 	for (int x = 0; x < 3;x++)
 	{
-		if (tictactoe[x][2] == XorO)
+		if (board[x][2] == XorO)
 		{
 			if (x == 2)
 			{
@@ -132,60 +140,111 @@ bool checkifyouwon()
 		}
 	}
 	
+	if (board[0][0] == XorO && board[1][1] == XorO && board[2][2] == XorO)
+	{
+		return true;
+	}
+
+	if (board[2][0] == XorO && board[1][1] == XorO && board[0][2] == XorO)
+	{
+		return true;
+	}
+
+
+
+
 	return false;
 }
 
-void getcommand()
+void getcommand() //used to place an X or an O where the player specified
 {
+	validinput = false;
 		cout << "it is currently player" << playernumber << "'s turn now" << endl;
-		cout << "please enter a number on the numpad and press enter player  " << " ";
+		cout << "please enter a number on the numpad and press enter" << " ";
 		cin >> input;
-	
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore();
+			return;
+		}
+
+		//controls for the game
+		//board[0][0] '7'  board[0][1] '8'  board[0][2] '9'
+		//board[1][0] '4'  board[1][1] '5'  board[1][2] '6' 
+		//board[2][0] '1'  board[2][1] '2'  board[2][2] '3'
 
 
 		switch (input)
 		{
 		case 7:
-			if (tictactoe[0][0] == ' ')
+			if (board[0][0] == ' ')
 			{
-				tictactoe[0][0] = XorO;
+				validinput = true;
+				board[0][0] = XorO;
 			}
 			break;
 		case 8:
-			if (tictactoe[0][1] == ' ')
+			if (board[0][1] == ' ')
 			{
-				tictactoe[0][1] = XorO;
+				validinput = true;
+				board[0][1] = XorO;
 			}
 		break;
 	case 9:
-		if (tictactoe[0][2] == ' ')
+		if (board[0][2] == ' ')
 		{
-			tictactoe[0][2] = XorO;
+			validinput = true;
+			board[0][2] = XorO;
 		}
 		break;
 	case 4:
-		if (tictactoe[1][0] == ' ')
-		tictactoe[1][0] = XorO;
+		if (board[1][0] == ' ')
+		{
+			validinput = true;
+			board[1][0] = XorO;
+		}
+
 		break;
 	case 5:
-		if (tictactoe[1][1] == ' ')
-		tictactoe[1][1] = XorO;
+		if (board[1][1] == ' ')
+		{
+			validinput = true;
+			board[1][1] = XorO;
+		}
+
 		break;
 	case 6:
-		if (tictactoe[1][2] == ' ')
-		tictactoe[1][2] = XorO;
+		if (board[1][2] == ' ')
+		{
+			validinput = true;
+			board[1][2] = XorO;
+		}
+
 		break;
 	case 1:
-		if (tictactoe[2][0] == ' ')
-		tictactoe[2][0] = XorO;
+		if (board[2][0] == ' ')
+		{
+			validinput = true;
+			board[2][0] = XorO;
+		}
+
 		break;
 	case 2:
-		if (tictactoe[2][1] == ' ')
-		tictactoe[2][1] = XorO;
+		if (board[2][1] == ' ')
+		{
+			validinput = true;
+			board[2][1] = XorO;
+		}
+
 		break;
 	case 3:
-		if (tictactoe[2][2] == ' ')
-		tictactoe[2][2] = XorO;
+		if (board[2][2] == ' ')
+		{
+			validinput = true;
+			board[2][2] = XorO;
+		}
+
 		break;
 	}
 
@@ -202,7 +261,7 @@ void draw()
 	{
 		for (int y = 0; y < 3; y++)
 		{
-			cout << "|" << tictactoe[x][y] << "|";
+			cout << "|" << board[x][y] << "|";
 			if (y == 2)
 				cout << endl;
 		}
@@ -216,21 +275,23 @@ void update()
 	if (checkifyouwon())
 	{
 		youwon();
+		return;
 	}
 	
 	if (checkiftiegame())
 	{
 		tiegame();
+		return;
 	}
 
 
 
-	if (playernumber == 1)
+	if (playernumber == 1 && validinput)
 	{
 		playernumber = 2;
 		XorO = 'O';
 	}
-	else if (playernumber == 2)
+	else if (playernumber == 2 && validinput)
 	{
 		playernumber = 1;
 		XorO = 'X';
