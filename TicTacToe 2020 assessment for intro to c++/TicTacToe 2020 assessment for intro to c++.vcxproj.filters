@@ -23,7 +23,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TicTacToe 2020 assessment for intro to c++.cpp">
+    <ClCompile Include="TicTacToe .cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

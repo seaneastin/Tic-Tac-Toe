@@ -28,7 +28,7 @@ void start()
 	}
 }
 
-void tiegame()
+void tiegame() //called when there is a tie game
 {
 	
 		cout << "nobody won the game" << endl;
@@ -36,7 +36,7 @@ void tiegame()
 		gameover = true;
 }
 
-void youwon()
+void youwon() //called when the game is won
 {
 	cout << "player " << playernumber << " won the game" << endl;
 	system("pause");
@@ -44,7 +44,7 @@ void youwon()
 
 }
 
-bool checkiftiegame()
+bool checkiftiegame() //checks if there is a tie game
 {
 	if (board[0][0] != ' ' && board[0][1] != ' ' && board[0][2] != ' ' && 
 		board[1][0] != ' ' && board[1][1] != ' ' && board[1][2] != ' ' && 
@@ -58,10 +58,10 @@ bool checkiftiegame()
 
 bool checkifyouwon()
 {
-	// a weird way to check if you won that somehow works
+	
 
 
-	for (int y = 0; y < 3 ;y++)
+	for (int y = 0; y < 3 ;y++) 
 	{
 		if (board[0][y] == XorO)
 		{
@@ -140,6 +140,7 @@ bool checkifyouwon()
 		}
 	}
 	
+
 	if (board[0][0] == XorO && board[1][1] == XorO && board[2][2] == XorO)
 	{
 		return true;
@@ -257,7 +258,7 @@ void playerinput() //used to place an X or an O where the player specified
 }
 
 
-void draw()
+void draw() 
 {
 	system("cls");
 	for (int x = 0; x < 3; x++)
@@ -271,7 +272,7 @@ void draw()
 	}
 }
 
-void update()
+void update() 
 {
 	draw();
 
