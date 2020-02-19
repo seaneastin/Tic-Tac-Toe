@@ -274,7 +274,7 @@ void draw()
 
 void update() 
 {
-	draw();
+
 
 	if (checkifyouwon())
 	{
@@ -314,6 +314,7 @@ int main()
 
 	while (!gameover)
 	{
+		draw();
 		update();
 	}
 
